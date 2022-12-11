@@ -1,0 +1,39 @@
+import keras
+from keras.models import Sequential
+from keras.layers import Dense, Dropout
+from keras.utils import np_utils
+
+import pandas as pd
+import pickle
+
+class Model:
+    def __init__(self):
+        self.model = None
+        self.data = pd.read_csv('data/train.csv')
+        self.X = ['SepalLengthCm', 'SepalWidthCm', 'PetalWidthCm']
+        self.y = ['Species']
+
+    def train(self):
+        model=Sequential()
+        model.add(Dense(1000,input_dim=3,activation='relu'))
+        model.add(Dense(500,activation='relu'))
+        model.add(Dense(300,activation='relu'))
+        model.add(Dropout(0.2))
+        model.add(Dense(3,activation='softmax'))
+        model.compile(loss='categorical_crossentropy',optimizer='adam',metrics=['accuracy'])
+
+        self.model = model
+
+        features = self.data[self.X].values
+        labels = np_utils.to_categorical(self.data[self.y], num_classes=3)
+
+        self.model.fit(features, labels)
+        return self.model    
+
+    def predict(self, items):
+        features = items.values
+        return self.model.predict(features)
+
+    def save(self):
+        with open('model.pickle', 'wb') as f: 
+            pickle.dump(self, f)

@@ -1,0 +1,29 @@
+from sklearn.ensemble import RandomForestRegressor 
+from sklearn.dummy import DummyRegressor
+
+from sklearn import preprocessing
+import pandas as pd
+import pickle
+
+class Model:
+    def __init__(self):
+        self.data = pd.read_csv('data/train.csv')
+        self.X = [ 'crim', 'zn', 'indus', 'chas', 'nox', 'rm', 'age', 'dis', 'rad', 'tax', 'ptratio', 'black', 'lstat']
+        self.y = ['medv']
+
+    def train(self):
+        self.model = RandomForestRegressor()
+
+        features = self.data[self.X].values
+        labels = self.data[self.y].values
+
+        self.model.fit(features, labels.ravel())
+        return self.model    
+
+    def predict(self, items):
+        features = items.values
+        return self.model.predict(features)
+
+    def save(self):
+        with open('model.pickle', 'wb') as f: 
+            pickle.dump(self, f)

@@ -1,0 +1,6 @@
+playbook: 'iris'
+metrics: 
+  - 'f1'
+  - 'acc'
+  - 'precision'
+  - 'recall'

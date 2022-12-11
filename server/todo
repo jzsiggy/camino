@@ -1,0 +1,12 @@
+# endpoint to receive data + eval metrics and create playbook
+# receives data partitioned in [public, internal_train, test] and metrics
+
+# endpoint to serve public data by playbook name
+# receives playbook id and returns public data associated
+
+# endpoint to receive submissions
+# allocates instance with code
+# trains the model
+# validates
+
+# endpoint to compile all models

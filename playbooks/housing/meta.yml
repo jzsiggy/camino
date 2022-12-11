@@ -1,0 +1,5 @@
+playbook: 'housing'
+metrics: 
+  - 'mae'
+  - 'mape'
+  - 'mse'
