@@ -1,6 +1,6 @@
 playbook: 'iris'
 metrics: 
   - 'f1'
-  - 'acc'
+  - 'accuracy'
   - 'precision'
   - 'recall'
